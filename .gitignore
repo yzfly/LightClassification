@@ -1,4 +1,6 @@
 *.zip
 .Rhistory
 
+.DS_Store
+
 **/__pycache__/

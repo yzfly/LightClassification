@@ -30,7 +30,7 @@ def data_info():
     
 def get_args():
     parser = argparse.ArgumentParser(description="LightGBM")
-    parser.add_argument("--data_path", default="datasets/bank-additional.csv", type=str)
+    parser.add_argument("--data_path", default="datasets/bank-additional-full.csv", type=str)
     parser.add_argument("--split_ratio", default=0.8, type=float)
     parser.add_argument("--thres", default=0.5, type=float)
     args = parser.parse_args()
@@ -107,8 +107,8 @@ def main(args):
     precision = cm[1][1] / np.sum(y_pred)
     f1 = 2*recall*precision/(recall+precision)
     acc = (cm[0][0]+cm[1][1]) / val_y.shape[0]
-    print('Acc: {}, F1: {}, Precision: {}, Recall: {}'.format(acc, f1, precision, recall))
-    print("Confusion Matrix: ", cm)
+    print('Acc: {:.3f}, F1: {:.3f}, Precision: {:.3f}, Recall: {:.3f}'.format(acc, f1, precision, recall))
+    print("Confusion Matrix: \n", cm)
 
 if __name__ == '__main__':
     args = get_args()
