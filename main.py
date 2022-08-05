@@ -5,6 +5,8 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import confusion_matrix
 
+
+
 def data_info():
     # Structured dataset information
     # Reference: datasets/bank-additional-names.txt
@@ -58,6 +60,9 @@ def train_val_dataset(args):
     val_set = dset[sep_ind:]
     return train_set, val_set
 
+def sigmoid(x):
+    z = 1/(1 + np.exp(-x))
+    return z
 
 def main(args):
     train_set, val_set = train_val_dataset(args)
@@ -91,6 +96,10 @@ def main(args):
 
     print("Start predicting...")
     y_pred = model.predict(val_x, num_iteration=model.best_iteration)
+
+    #y_pred = sigmoid(y_pred)
+    val_y = val_y.astype(int)
+
     y_pred[y_pred >= args.thres] = 1
     y_pred[y_pred < args.thres] = 0
     cm = confusion_matrix(val_y, y_pred)
