@@ -1,0 +1,4 @@
+*.zip
+.Rhistory
+
+**/__pycache__/
